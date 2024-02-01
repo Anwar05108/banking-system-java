@@ -1,4 +1,4 @@
-Current Account,Md. Anowar Sharif,4456,Cu0,2024-01-31,100000.0
-Current Account,alskd,232,Cu580367,2024-01-31,104.0
-Current Account,alsdkf,123,Cu106262,2024-01-31,400000.0
-Fixed Deposit Account,lask,123,Fi64948,2024-01-31,310.0
+Current Account,Anowar,4456,Cu0,2024-01-31,99890.0
+Current Account,alskd,232,Cu580367,2024-01-31,500.0
+Current Account,alsdf,123,Cu106262,2024-01-31,388995.0
+Fixed Deposit Account,lsk,123,Fi64948,2024-01-31,310.0
