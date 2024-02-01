@@ -94,6 +94,7 @@ public class BankingSystem {
         try {
             FileReader fileReader = new FileReader(FILE_NAME);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
+            System.out.println("-".repeat(150));
 
             System.out.printf("%-25s %-25s %-25s %-25s %-25s %-25s\n", "Type", "Name", "ID", "Number",
                     "Account Opening Date", "Balance");
@@ -112,6 +113,8 @@ public class BankingSystem {
 
                 System.out.printf("%-25s %-25s %-25s %-25s %-25s %-25s\n", type, name, id, number, openingDate,
                         balance);
+                System.out.println("-".repeat(150));
+
             }
 
             bufferedReader.close();
@@ -123,7 +126,7 @@ public class BankingSystem {
     }
 
     public void updateAccount() {
-        try{
+        try {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter account number:");
             String accountNumber = scanner.nextLine();
@@ -154,21 +157,19 @@ public class BankingSystem {
                     accountDetails[2] = accountHolderId;
                     updatedLine = String.join(DELIMITER, accountDetails);
                     break;
-                
+
                 default:
                     throw new Exception("Error: Invalid choice");
             }
 
             updateFile(accountNumber, updatedLine);
 
-
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error updating account: " + e.getMessage());
         }
     }
 
-    private void updateFile(String accountNumber, String updatedLine) throws Exception{
+    private void updateFile(String accountNumber, String updatedLine) throws Exception {
         File file = new File(FILE_NAME);
         RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
 
@@ -262,8 +263,6 @@ public class BankingSystem {
 
                     updatedFileContent += type + DELIMITER + name + DELIMITER + id + DELIMITER + number + DELIMITER
                             + openingDate + DELIMITER + newBalance + NEW_LINE_SEPARATOR;
-                } else {
-                    updatedFileContent += line + NEW_LINE_SEPARATOR;
                 }
             }
 
@@ -274,11 +273,7 @@ public class BankingSystem {
                 throw new Exception(" Account not found");
             }
 
-            FileWriter fileWriter = new FileWriter(FILE_NAME);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(updatedFileContent);
-            bufferedWriter.close();
-            fileWriter.close();
+            updateFile(accountNumber, newBalance);
 
             System.out
                     .println("Amount deposited successfully! New balance is " + newBalance + "\n" + updatedFileContent);
@@ -311,6 +306,8 @@ public class BankingSystem {
 
             updateFile(accountNumber, newBalance);
 
+            System.out.println("Amount withdrawn successfully! New balance is " + newBalance);
+
         } catch (Exception e) {
             System.out.println("Error withdrawing amount: " + e.getMessage());
         }
@@ -327,9 +324,8 @@ public class BankingSystem {
             String accountDetails[] = line.split(DELIMITER);
             String number = accountDetails[3];
             if (number.equals(userAccountNumber)) {
-                
+
                 accountDetails[5] = String.valueOf(newBalance);
-                
 
                 randomAccessFile.seek(currentPosition);
                 String updatedLine = String.join(DELIMITER, accountDetails);
